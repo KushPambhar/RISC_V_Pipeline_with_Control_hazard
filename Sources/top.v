@@ -6,7 +6,7 @@ module top(input clk, input reset);
 
     wire [31:0] pc_if_id, pc_next_if_id, Instruction_if_id;
     wire IF_ID_Write;
-    wire stall;
+    wire stall_hazard;
 
     wire Branch, MemRead, MemtoReg, MemWrite, AluSrcB, RegWrite;
     wire [1:0] AluOP, AluSrcA;
@@ -41,6 +41,7 @@ module top(input clk, input reset);
 
     wire branch_taken;
     wire branch_and;
+    wire branch_not_taken;
     wire [31:0] pc_branch;
     wire [31:0] DataMemoryOut;
 
@@ -56,16 +57,20 @@ module top(input clk, input reset);
     adder a1(pc_out,32'd4,pc_next);
     
     //IF_ID
-    IF_ID if_id(clk, reset, pc_out, pc_next,Instruction,IF_ID_Write,pc_if_id, pc_next_if_id, Instruction_if_id);
+    wire if_id_reset = reset||branch_not_taken; // If you want to add Further Reset Setting, you may use this;
+    wire IF_ID_Write_new = IF_ID_Write && (~branch_not_taken); // If you want to add Further Reset Setting, you may use this;
+    IF_ID if_id(clk, if_id_reset, pc_out, pc_next,Instruction,IF_ID_Write_new,pc_if_id, pc_next_if_id, Instruction_if_id);
 
     //Hazard-detection
-    hazard_detection hazard_inst(Instruction_if_id[19:15],Instruction_if_id[24:20],Instruction_id_ex[11:7],MemRead_id_ex,PcWrite,IF_ID_Write,stall);
+    hazard_detection hazard_inst(Instruction_if_id[19:15],Instruction_if_id[24:20],Instruction_id_ex[11:7],MemRead_id_ex,PcWrite,IF_ID_Write,stall_hazard);
     
     //ID
     reg_file rf_inst(clk,Instruction_if_id[19:15],Instruction_if_id[24:20],Instruction_mem_wb[11:7],WriteData,ReadData1,ReadData2,RegWrite_mem_wb); 
     immgen immgen_inst(Instruction_if_id,Imm_Gen_Out);
     control control_inst(Instruction_if_id[6:0],RegWrite,MemWrite,MemRead,MemtoReg,Branch,AluSrcB,AluSrcA,AluOP);
     
+    // 
+    wire stall = stall_hazard || branch_not_taken;
     //control_mux
     assign RegWrite_gated = stall ? 1'b0 : RegWrite;
     assign MemWrite_gated = stall ? 1'b0 : MemWrite;   
@@ -78,7 +83,8 @@ module top(input clk, input reset);
 
 
     //ID_EX
-    ID_EX id_ex(clk, reset,
+    wire id_ex_reset = reset||branch_not_taken;
+    ID_EX id_ex(clk, id_ex_reset,
         pc_if_id, pc_next_if_id, Instruction_if_id,
         ReadData1,ReadData2,Imm_Gen_Out,
         AluOP_gated, AluSrcA_gated,AluSrcB_gated,
