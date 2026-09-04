@@ -129,6 +129,7 @@ module top(input clk, input reset);
     // MEM
     branch_logic branch_inst(Instruction_ex_mem[14:12],zero_ex_mem,lt_ex_mem,ltu_ex_mem,branch_taken);
     assign branch_and = branch_taken & Branch_ex_mem;
+    ctrl_NT(branch_and,branch_not_taken);
     mux_2x1 mux2_pcsel(pc_next,pc_branch_ex_mem, branch_and, pc_in);
     data_mem dmem_inst(AluOut_ex_mem,clk,ReadData2_ex_mem,DataMemoryOut,MemRead_ex_mem,MemWrite_ex_mem);
 
