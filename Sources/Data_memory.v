@@ -27,7 +27,4 @@ module data_mem(data_address,clk,write_data, Read_data, MemRead, MemWrite);
         end
     end
 
-    final begin
-        $writememh("dmem.hex", mem);
-    end
 endmodule
