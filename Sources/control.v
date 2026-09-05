@@ -90,7 +90,7 @@ module control(
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
                 ALUSrcB   = 1'b1;
-                ALUSrcA   = 2'b00;
+                ALUSrcA   = 2'b01;
                 ALUOp     = 2'b00;
             end
 
