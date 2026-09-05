@@ -26,4 +26,8 @@ module data_mem(data_address,clk,write_data, Read_data, MemRead, MemWrite);
             mem[add+3] <= write_data[31:24];
         end
     end
+
+    final begin
+        $writememh("dmem.hex", mem);
+    end
 endmodule
