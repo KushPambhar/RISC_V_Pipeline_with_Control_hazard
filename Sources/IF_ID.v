@@ -1,7 +1,7 @@
 module IF_ID(input clk, input reset ,input [31:0] pc_if, input [31:0] pc_4_if, input [31:0] instruction_if, input IF_ID_Write, 
             output reg [31:0] pc_id, output reg [31:0] pc_4_id, output reg [31:0] instruction_id );
 
-            always @(posedge clk or posedge reset) begin
+            always @(posedge clk) begin
                 if(reset) begin
                     pc_id<=32'b0;
                     pc_4_id<=32'b0;
