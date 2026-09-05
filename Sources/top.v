@@ -119,7 +119,7 @@ module top(input clk, input reset);
     //EX_MEM
     EX_MEM ex_mem(clk, reset,
         pc_id_ex, pc_next_id_ex, Instruction_id_ex,
-        SrcBOut, //Later the name is changed to ReadData2_ex_mem but content is same.
+        ReadData2_fwd_b, //Later the name is changed to ReadData2_ex_mem but content is same.
         Branch_id_ex, MemRead_id_ex,MemWrite_id_ex,
         RegWrite_id_ex, MemtoReg_id_ex,
         AluOut,zero,lt,ltu,
