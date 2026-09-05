@@ -15,7 +15,7 @@ module ID_EX(input clk, input reset ,input [31:0] pc_id, input [31:0] pc_4_id, i
             output reg RegWrite_ex, output reg MemtoReg_ex //WB
             );
 
-            always @(posedge clk or posedge reset) begin
+            always @(posedge clk) begin
                 if(reset) begin
                     pc_ex<=32'b0;
                     pc_4_ex<=32'b0;
