@@ -5,8 +5,8 @@ module control(
     output reg MemRead,
     output reg MemtoReg,
     output reg Branch,
-    output reg  ALUSrcA,      // 0 = rs2, 1 = immediate  -> ALU input B
-    output reg [1:0] ALUSrcB,     // 0 = rs1, 1 = PC, 2 = 0   -> ALU input A
+    output reg  ALUSrcB,      // 0 = rs2, 1 = immediate  -> ALU input B
+    output reg [1:0] ALUSrcA,     // 0 = rs1, 1 = PC, 2 = 0   -> ALU input A
     output reg [1:0]  ALUOp        // coarse op class, refined by alu_control
 );
     always @(*) begin
@@ -16,8 +16,8 @@ module control(
         Branch    = 1'b0;
         MemRead   = 1'b0;
         MemtoReg  = 1'b0;
-        ALUSrcA   = 1'b0;
-        ALUSrcB   = 2'b00;
+        ALUSrcB   = 1'b0;
+        ALUSrcA  = 2'b00;
         ALUOp     = 2'b00;
 
         case (opcode)
@@ -29,8 +29,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b1;
                 MemtoReg  = 1'b1;
-                ALUSrcA   = 1'b1;
-                ALUSrcB   = 2'b00;
+                ALUSrcB   = 1'b1;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b00; //to be updated
             end
 
@@ -41,8 +41,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b1;
-                ALUSrcB   = 2'b00;
+                ALUSrcB   = 1'b1;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b00;
             end
 
@@ -53,8 +53,8 @@ module control(
                 Branch    = 1'b1;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b0;
-                ALUSrcB   = 2'b00;
+                ALUSrcB   = 1'b0;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b01;    // subtract/compare
             end
 
@@ -65,8 +65,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b1;
-                ALUSrcB   = 2'b00;
+                ALUSrcB   = 1'b1;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b11;
             end
 
@@ -77,8 +77,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b0;
-                ALUSrcB   = 2'b00;
+                ALUSrcB   = 1'b0;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b10;
             end
 
@@ -89,8 +89,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b0;
-                ALUSrcB   = 2'b01;
+                ALUSrcB   = 1'b0;
+                ALUSrcA   = 2'b01;
                 ALUOp     = 2'b00;
             end
 
@@ -101,8 +101,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcA   = 1'b0;
-                ALUSrcB   = 2'b10;
+                ALUSrcB   = 1'b0;
+                ALUSrcA  = 2'b10;
                 ALUOp     = 2'b00;
             end
 
