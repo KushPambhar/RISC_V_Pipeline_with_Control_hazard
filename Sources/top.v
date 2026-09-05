@@ -136,7 +136,7 @@ module top(input clk, input reset);
     branch_logic branch_inst(Instruction_ex_mem[14:12],zero_ex_mem,lt_ex_mem,ltu_ex_mem,branch_taken);
     assign branch_and = branch_taken & Branch_ex_mem;
     // ctrl_NT(branch_and,flush_on_taken);
-    ctrl_T(branch_and,flush_on_not_taken);
+    ctrl_T(branch_and,Branch_ex_mem,flush_on_not_taken);
     
     data_mem dmem_inst(AluOut_ex_mem,clk,ReadData2_ex_mem,DataMemoryOut,MemRead_ex_mem,MemWrite_ex_mem);
 
