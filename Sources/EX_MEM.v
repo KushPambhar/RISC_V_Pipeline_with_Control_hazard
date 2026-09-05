@@ -7,7 +7,7 @@ module EX_MEM(input clk, input reset ,input [31:0] pc_ex, input [31:0] pc_4_ex, 
             input RegWrite_ex, input MemtoReg_ex, //WB
 
             //
-            input [31:0] pc_branch_ex, input [31:0] ALUOut_ex, input zero_ex,input lt_ex, input ltu_ex,
+            input [31:0] ALUOut_ex, input zero_ex,input lt_ex, input ltu_ex,
 
 
             output reg [31:0] pc_mem, output reg [31:0] pc_4_mem, output reg [31:0] instruction_mem,
@@ -19,7 +19,7 @@ module EX_MEM(input clk, input reset ,input [31:0] pc_ex, input [31:0] pc_4_ex, 
             output reg RegWrite_mem, output reg MemtoReg_mem, //WB
 
             //
-            output reg [31:0] pc_branch_mem, output reg [31:0] ALUOut_mem, output reg zero_mem , output reg lt_mem , output reg ltu_mem
+            output reg [31:0] ALUOut_mem, output reg zero_mem , output reg lt_mem , output reg ltu_mem
 
             );
 
@@ -37,7 +37,7 @@ module EX_MEM(input clk, input reset ,input [31:0] pc_ex, input [31:0] pc_4_ex, 
                     RegWrite_mem   <= 1'b0;
                     MemtoReg_mem   <= 1'b0;
 
-                    pc_branch_mem  <= 32'b0;
+            
                     ALUOut_mem     <= 32'b0;
                     zero_mem       <= 1'b0;
                     lt_mem         <= 1'b0;
@@ -56,7 +56,7 @@ module EX_MEM(input clk, input reset ,input [31:0] pc_ex, input [31:0] pc_4_ex, 
                     RegWrite_mem   <= RegWrite_ex;
                     MemtoReg_mem   <= MemtoReg_ex;
 
-                    pc_branch_mem  <= pc_branch_ex;
+            
                     ALUOut_mem     <= ALUOut_ex;
                     zero_mem       <= zero_ex;
                     lt_mem         <= lt_ex;
