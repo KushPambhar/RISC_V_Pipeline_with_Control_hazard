@@ -89,8 +89,8 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcB   = 1'b0;
-                ALUSrcA   = 2'b01;
+                ALUSrcB   = 1'b1;
+                ALUSrcA   = 2'b00;
                 ALUOp     = 2'b00;
             end
 
@@ -101,7 +101,7 @@ module control(
                 Branch    = 1'b0;
                 MemRead   = 1'b0;
                 MemtoReg  = 1'b0;
-                ALUSrcB   = 1'b0;
+                ALUSrcB   = 1'b1;
                 ALUSrcA  = 2'b10;
                 ALUOp     = 2'b00;
             end
