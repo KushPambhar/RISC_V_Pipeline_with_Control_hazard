@@ -13,4 +13,4 @@ module IF_ID(input clk, input reset ,input [31:0] pc_if, input [31:0] pc_4_if, i
                     instruction_id <= instruction_if;
                 end
             end
-endmodule;
+endmodule
