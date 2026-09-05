@@ -61,8 +61,8 @@ module top(input clk, input reset);
     adder a1(pc_out,32'd4,pc_next);
     
     //IF_ID
-    wire if_id_reset = reset||flush_on_not_taken; // If you want to add Further Reset Setting, you may use this;
-    wire IF_ID_Write_new = IF_ID_Write && (~flush_on_not_taken); // If you want to add Further Reset Setting, you may use this;
+    wire if_id_reset = reset||flush_on_not_taken || Branch; // If you want to add Further Reset Setting, you may use this;
+    wire IF_ID_Write_new = IF_ID_Write && (~flush_on_not_taken) ; // If you want to add Further Reset Setting, you may use this;
     IF_ID if_id(clk, if_id_reset, pc_out, pc_next,Instruction,IF_ID_Write_new,pc_if_id, pc_next_if_id, Instruction_if_id);
 
     //Hazard-detection
