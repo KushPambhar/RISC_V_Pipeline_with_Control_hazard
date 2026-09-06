@@ -35,7 +35,7 @@ module tb_pipeline_fwd;
         reset = 1;
         for (i = 0; i < 32; i = i + 1)
             dut.rf_inst.registers[i] = 32'h0;
-        repeat (2) @(posedge clk);
+        repeat (2) @(negedge clk);
         reset = 0;
     end
 
